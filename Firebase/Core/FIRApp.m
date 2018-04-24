@@ -675,7 +675,8 @@ static NSMutableDictionary *sLibraryVersions;
   static dispatch_once_t onceToken;
   dispatch_once(&onceToken, ^{
     // Read the data from the `Info.plist`, only assign it if it's there and an NSNumber.
-    id plistValue = [[NSBundle mainBundle] objectForInfoDictionaryKey:kFIRGlobalAppDataCollectionEnabledPlistKey];
+    id plistValue = [[NSBundle mainBundle]
+        objectForInfoDictionaryKey:kFIRGlobalAppDataCollectionEnabledPlistKey];
     if (plistValue && [plistValue isKindOfClass:[NSNumber class]]) {
       collectionEnabledPlistObject = (NSNumber *)plistValue;
     }
@@ -690,7 +691,9 @@ static NSMutableDictionary *sLibraryVersions;
                         version:(NSString *)version
                           error:(NSError *)error {
   // If the user has manually turned off data collection, return and don't send logs.
-  if (![self isAutomaticDataCollectionEnabled]) { return; }
+  if (![self isAutomaticDataCollectionEnabled]) {
+    return;
+  }
 
   NSMutableDictionary *userInfo = [[NSMutableDictionary alloc] initWithDictionary:@{
     kFIRAppDiagnosticsConfigurationTypeKey : @(FIRConfigTypeSDK),
